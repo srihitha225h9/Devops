@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Group Registration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://tse1.mm.bing.net/th?id=OIP.WThYmus1ZfaIW7w7B6j7EwHaEk&pid=Api&P=0&h=180') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            position: relative;
+        }
+        /* Overlay to soften background image */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85); /* Adjust opacity to change contrast */
+            z-index: -1;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+            max-width: 600px;
+        }
+        h1 {
+            color: #333;
+        }
+        .group-option {
+            display: inline-block;
+            margin: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+        .group-option img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+        }
+        .group-option.selected {
+            border-color: #28a745; /* Highlight selected option with a border color */
+        }
+        .group-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .group-option label {
+            display: block;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Student Group Registration Form</h1>
+
+<div class="container">
+    <form onsubmit="return validateForm()">
+        <label for="student_name"><b>Student Name:</b></label>
+        <input type="text" id="student_name" name="student_name" class="form-control" required>
+
+        <label for="roll_no"><b>Roll No:</b></label>
+        <input type="text" id="roll_no" name="roll_no" class="form-control" required>
+
+        <p><b>Select Your Group:</b></p>
+        <div class="group-option" onclick="selectGroup('Science', this)">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.CP66Qh9DqL_66ESN6Hzu6wHaE7&pid=Api&P=0&h=180" alt="Science Group">
+            <label>Science</label>
+            <input type="radio" name="group" value="Science" style="display:none;">
+        </div>
+        <div class="group-option" onclick="selectGroup('Arts', this)">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.K1DFYRBWV3cT_q0MZF7jNwHaE8&pid=Api&P=0&h=180" alt="Arts Group">
+            <label>Arts</label>
+            <input type="radio" name="group" value="Arts" style="display:none;">
+        </div>
+        <div class="group-option" onclick="selectGroup('Commerce', this)">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.WMhQbgvimbfrteyYSp97tgHaFP&pid=Api&P=0&h=180" alt="Commerce Group">
+            <label>Commerce</label>
+            <input type="radio" name="group" value="Commerce" style="display:none;">
+        </div>
+
+        <br>
+        <input type="submit" value="Register">
+    </form>
+</div>
+
+<script>
+    function selectGroup(group, element) {
+        // Set the radio button for the selected group
+        document.querySelectorAll('input[name="group"]').forEach(input => {
+            input.checked = input.value === group;
+        });
+        
+        // Highlight the selected group option visually
+        document.querySelectorAll('.group-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        element.classList.add('selected');
+    }
+
+    function validateForm() {
+        const studentName = document.getElementById("student_name").value;
+        const rollNo = document.getElementById("roll_no").value;
+        const groupSelected = document.querySelector('input[name="group"]:checked');
+
+        if (!studentName || !rollNo || !groupSelected) {
+            alert("Please fill out all required fields and select a group.");
+            return false;
+        }
+
+        // Redirect to a new page after successful form validation
+        window.location.href = "nextPage.html"; // Replace "nextPage.html" with the actual page URL
+        return false; // Prevents the default form submission
+    }
+</script>
+
+</body>
+</html>
